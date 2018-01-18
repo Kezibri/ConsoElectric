@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 public class Home {
-	
+	//test
 	@Id
 	@GeneratedValue
 	private long id;
