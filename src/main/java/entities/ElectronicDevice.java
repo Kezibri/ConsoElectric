@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class ElectronicDevice extends SmartDevice {
 
-	@Id
+	@Id    
 	@GeneratedValue
 	private long id;
 	private double consoMoy;
