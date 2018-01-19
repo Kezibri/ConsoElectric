@@ -13,7 +13,7 @@ public class Person {
 	private long id;
 	private String firstName;
 	private String familyName;
-	private String mail;
+	private String mail; //testing if working
 	
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
 	private List<Home> homes;
