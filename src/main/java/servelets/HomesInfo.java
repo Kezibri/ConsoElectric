@@ -13,11 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Home;
 import entities.Person;
 import jpa.JpaTest;
 
-@WebServlet(name="personInfo", urlPatterns={"/PersonInfo"})
-public class PersonInfo extends HttpServlet {
+@WebServlet(name="homesInfo", urlPatterns={"/HomesInfo"})
+public class HomesInfo extends HttpServlet {
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -29,15 +30,14 @@ public class PersonInfo extends HttpServlet {
 		response.setContentType("text/html");
 		 PrintWriter out = response.getWriter();
 		 out.println("<h2><a href=\"index.html\">Retour page d'acueil</a></h2>");
-		 out.println("<table border = 2 cellpadding = \"10\" cellspacing = \"10\" align= \"center\">  <tr>  <th>Prenom</th> <th>Nom</th>  <th>Email</th> " );
-         for (Person next : test.listPersons()) {
-             out.println( " <tr>    <td>"+next.getFirstName()+"</td>   <td>"+next.getFamilyName()+"</td>   <td>"+next.getMail()+"</td> </tr>  " ) ;
+		 out.println("<table border = 2 cellpadding = \"10\" cellspacing = \"10\" align= \"center\">  <tr>  <th>Maison</th> <th>Surface</th>  <th>Nb pieces</th> <th>Proprietaire</th>" );
+         for (Home next : test.allHomes()) {
+             out.println( " <tr>    <td>"+next.getMyHome()+"</td>   <td>"+next.getSurface()+"</td>   <td>"+next.getNumRooms()+"</td> <td>"+ next.getOwner().getFamilyName()+" "+ next.getOwner().getFirstName()+"</td></tr>  " ) ;
          }
          out.println( "</table> " ) ;
  		tx.commit();
  		manager.close();
 	}
-	
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("dev");
@@ -47,27 +47,14 @@ public class PersonInfo extends HttpServlet {
 		tx.begin();
 		response.setContentType("text/html");
 		 PrintWriter out = response.getWriter();
-		test.createPerson(request.getParameter("firstname"), request.getParameter("familyname") , request.getParameter("email"));
+		test.createHome(request.getParameter("myhome"), Double.parseDouble(request.getParameter("surface")) , Integer.parseInt(request.getParameter("nbpce")), test.getPerson(Long.parseLong(request.getParameter("owner"))));
 		 out.println("<h2><a href=\"index.html\">Retour page d'acueil</a></h2>");
-         out.println("<table border = 2 cellpadding = \"10\" cellspacing = \"10\" align= \"center\">  <tr>  <th>Prenom</th> <th>Nom</th>  <th>Email</th> " );
-         for (Person next : test.listPersons()) {
-             out.println( " <tr>    <td>"+next.getFirstName()+"</td>   <td>"+next.getFamilyName()+"</td>   <td>"+next.getMail()+"</td> </tr>  " ) ;
+         out.println("<table border = 2 cellpadding = \"10\" cellspacing = \"10\" align= \"center\">  <tr>  <th>Maison</th> <th>Surface</th>  <th>Nb pieces</th> <th>Proprietaire</th> " );
+         for (Home next : test.allHomes()) {
+             out.println( " <tr>    <td>"+next.getMyHome()+"</td>   <td>"+next.getSurface()+"</td>   <td>"+next.getNumRooms()+"</td> <td> "+ next.getOwner().getFamilyName()+" "+ next.getOwner().getFirstName()+"</td></tr>  " ) ;
          }
          out.println( "</table> " ) ;
  		tx.commit();
  		manager.close();
- 		
-		/*out.println("<HTML>\n<BODY>\n" +
-				"<H1>List des personnes : </H1>\n" +
-				"<UL>\n" +			
-		" <LI>Firstname: "
-				+ request.getParameter("firstname") + "\n" +
-				" <LI>Familyname: "
-				+ request.getParameter("familyname") + "\n" +
-				" <LI>Email: "
-				+ request.getParameter("email") + "\n" +
-				"</UL>\n" +				
-		"</BODY></HTML>");*/
-     
-		}
+	}
 }

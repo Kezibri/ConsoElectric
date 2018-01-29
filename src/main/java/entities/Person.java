@@ -18,8 +18,43 @@ public class Person {
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
 	private List<Home> homes;
 	
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
+	private List<ElectronicDevice> eDevices;
+	
 	@ManyToMany
 	private List<Person> friends;
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public List<Home> getHomes() {
+		return homes;
+	}
+
+	public void setHomes(List<Home> homes) {
+		this.homes = homes;
+	}
+
+	public List<ElectronicDevice> geteDevices() {
+		return eDevices;
+	}
+
+	public void seteDevices(List<ElectronicDevice> eDevices) {
+		this.eDevices = eDevices;
+	}
+
+	public List<Person> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<Person> friends) {
+		this.friends = friends;
+	}
 	
 	public Person(){}
 	
@@ -56,5 +91,14 @@ public class Person {
 		this.mail = mail;
 	}
 	
+	public void addHome(Home h)
+	{
+		homes.add(h);
+	}
+	
+	public void addEDevice(ElectronicDevice ed)
+	{
+		eDevices.add(ed);
+	}
 	
 }

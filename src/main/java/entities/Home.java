@@ -11,6 +11,7 @@ public class Home {
 	@Id
 	@GeneratedValue
 	private long id;
+	private String myHome;
 	private double surface;
 	private int numRooms;
 	
@@ -20,18 +21,27 @@ public class Home {
 	@OneToMany(mappedBy = "home", cascade = CascadeType.PERSIST)
 	private List<Heater> heaters;
 	
-	@OneToMany(mappedBy = "home", cascade = CascadeType.PERSIST)
-	private List<ElectronicDevice> eDevices;
-	
 	public Home(){}
 	
-	public Home(double surface, int numRooms, Person p) {
+	public Home(String myHome) {
 		super();
+		this.myHome = myHome;
+	}
+
+	public Home(String myHome, double surface, int numRooms, Person p) {
+		super();
+		this.myHome = myHome;
 		this.surface = surface;
 		this.numRooms = numRooms;
 		this.owner = p;
 		heaters = new ArrayList<Heater>();
-		eDevices = new ArrayList<ElectronicDevice>();
+	}
+	public String getMyHome() {
+		return myHome;
+	}
+
+	public void setMyHome(String myHome) {
+		this.myHome = myHome;
 	}
 
 	public int getNumRooms() {
@@ -57,6 +67,26 @@ public class Home {
 	public void setSurface(double surface) {
 		this.surface = surface;
 	}
+	
+	public long getId() {
+		return id;
+	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public List<Heater> getHeaters() {
+		return heaters;
+	}
+
+	public void setHeaters(List<Heater> heaters) {
+		this.heaters = heaters;
+	}
+
+	public void addHeater(Heater h)
+	{
+		heaters.add(h);
+	}
 	
 }

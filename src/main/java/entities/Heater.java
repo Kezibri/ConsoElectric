@@ -8,8 +8,16 @@ public class Heater extends SmartDevice {
 	@Id
 	@GeneratedValue
 	private long id;
+	private String hName;
 	@ManyToOne
 	private Home home;
+	
+	public Heater() { }
+
+	public Heater(String hName) {
+		super();
+		this.hName = hName;
+	}
 	
 	public Home getHome() {
 		return home;
@@ -17,6 +25,20 @@ public class Heater extends SmartDevice {
 	public void setHome(Home home) {
 		this.home = home;
 	}
-	
-	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String gethName() {
+		return hName;
+	}
+
+	public void sethName(String hName) {
+		this.hName = hName;
+	}
 }
