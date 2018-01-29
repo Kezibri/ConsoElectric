@@ -15,13 +15,13 @@ public class Person {
 	private String familyName;
 	private String mail; //testing if working
 	
-	@OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
 	private List<Home> homes;
 	
-	@OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.PERSIST, fetch=FetchType.EAGER)
 	private List<ElectronicDevice> eDevices;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	private List<Person> friends;
 	
 	public long getId() {

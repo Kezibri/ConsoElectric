@@ -18,7 +18,7 @@ public class Home {
 	@ManyToOne
 	private Person owner;
 	
-	@OneToMany(mappedBy = "home", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "home", cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
 	private List<Heater> heaters;
 	
 	public Home(){
