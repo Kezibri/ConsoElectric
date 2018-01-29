@@ -21,7 +21,9 @@ public class Home {
 	@OneToMany(mappedBy = "home", cascade = CascadeType.PERSIST)
 	private List<Heater> heaters;
 	
-	public Home(){}
+	public Home(){
+		heaters = new ArrayList<Heater>();
+	}
 	
 	public Home(String myHome) {
 		super();

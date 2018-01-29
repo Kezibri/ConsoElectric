@@ -9,6 +9,7 @@ public class Heater extends SmartDevice {
 	@GeneratedValue
 	private long id;
 	private String hName;
+	private int power;
 	@ManyToOne
 	private Home home;
 	
@@ -41,4 +42,14 @@ public class Heater extends SmartDevice {
 	public void sethName(String hName) {
 		this.hName = hName;
 	}
+
+	public int getPower() {
+		return power;
+	}
+
+	public void setPower(int power) {
+		this.power = power;
+	}
+	
+	
 }
