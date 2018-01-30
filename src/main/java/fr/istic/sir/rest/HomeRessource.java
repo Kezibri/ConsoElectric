@@ -35,7 +35,7 @@ public class HomeRessource {
     }
     
     @GET 
-    @Path("search/{id}")
+    @Path("/{id}")
     @Produces({ MediaType.APPLICATION_JSON })
     public Home findById(@PathParam("id") String arg0) {
     	EntityManagerFactory factory = Persistence.createEntityManagerFactory("dev");

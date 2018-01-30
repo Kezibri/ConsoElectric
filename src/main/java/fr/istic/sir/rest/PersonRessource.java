@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,18 +20,15 @@ import jpa.JpaTest;
 @Path("/persons")
 public class PersonRessource {
 	
+	JpaTest test ;
+	
 	private List<Person> persons = new ArrayList<Person>();
 	
 	public PersonRessource()
 	{
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("dev");
 		EntityManager manager = factory.createEntityManager();
-		JpaTest test = new JpaTest(manager);
-		EntityTransaction tx = manager.getTransaction();
-		tx.begin();
-		persons = test.listPersons();
-		tx.commit();
- 		manager.close();
+		test = new JpaTest(manager);
 	}
 	
     @GET
@@ -42,10 +38,10 @@ public class PersonRessource {
     }
     
     @GET 
-    @Path("search/{id}")
+    @Path("/{id}")
     @Produces({ MediaType.APPLICATION_JSON })
-    public Person findById(@PathParam("id") String arg0) {
-        return persons.get(Integer.parseInt(arg0));
+    public Person findById(@PathParam("id") long arg0) {
+        return test.getPerson(arg0);
     }
 
     @DELETE 

@@ -92,6 +92,6 @@ public class JpaTest {
 		}
 	
 	public Person getPerson(long id ){
-		return  manager.createQuery("Select a From Person a WHERE id="+id, Person.class).getSingleResult();	
+		return  manager.find(Person.class, id);
 		}
 }
